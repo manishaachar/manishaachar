@@ -10,7 +10,7 @@ then
 echo "Good Afternoon Mr./Mrs. $user"
 elif [ $h -ge 16 ] && [ $h -lt 19 ]
 then
-echo "Good Evening"
+echo "Good Evening Mr./Mrs. $user"
 else
-echo "Good Night"
+echo "Good Night Mr./Mrs. $user"
 fi
