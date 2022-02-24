@@ -1,32 +1,33 @@
 #include<stdio.h>
 #include<stdlib.h>
-int main()
+void main()
 {
-int a[20],key,i,n,low=0,high,mid;
-printf("array is");
+int low,high,mid,key,a[10],n,i;
+printf("Enter value of n");
 scanf("%d",&n);
-printf("Enter the array element");
+printf("Enter the array values");
 for(i=0;i<n;i++)
 scanf("%d",&a[i]);
-printf("Enter the key");
+printf("Enter the key value");
 scanf("%d",&key);
-high=n-1;
+low=0,high=n-1;
 while(low<=high)
 {
-mid=(high+low)/2;
-if(a[mid]==key)
+mid=(low+high)/2;
+if(key==a[mid])
 {
-printf("item found");
-return 0;
+printf("Item found at loc %d",mid); 
+exit(0);
 }
+
 else if(key<a[mid])
+{
 high=mid-1;
+}
 else
+{
 low=mid+1;
 }
-printf("item is not found");
 }
-
-
-
-
+printf("Item not found");
+}

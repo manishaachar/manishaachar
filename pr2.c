@@ -1,21 +1,24 @@
 #include<stdio.h>
-void main()
+int main()
 {
-int a[20],n=4,i,key,flag=0;
-printf("array is");
+int a[10],i,n,key;
+printf("Enter value of n");
 scanf("%d",&n);
+printf("Enter the array values");
 for(i=0;i<n;i++)
 scanf("%d",&a[i]);
-printf("enter the key ");
+printf("Enter the key values");
 scanf("%d",&key);
 for(i=0;i<n;i++)
+{
 if(key==a[i])
 {
-flag=1;
+printf("Number found at loc %d",i);
+return 0;
 }
-if(flag==1)
-printf("item found");
-else
-printf("item not found");
 }
+printf("Number not found");
+}
+
+
 
