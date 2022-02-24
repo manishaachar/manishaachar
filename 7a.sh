@@ -2,7 +2,6 @@ set -- `who`
 user=$1
 set -- `echo $4 |tr ":" " "`
 h=$1
-
 if [ $h -ge 4 ] && [ $h -lt 12 ]
 then
 echo "Good morning Mr./Mrs. $user"
