@@ -1,3 +1,7 @@
+#Write a C program to Implement the following searching techniques 
+#a. Linear Search 
+#b. Binary Search.
+
 #include<stdio.h>
 #include<stdlib.h>
 void main()
