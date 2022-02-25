@@ -1,4 +1,4 @@
-#Write a programfor distance vector algorithm to find suitable path for transmission.
+#Write a program For distance vector algorithm to find suitable path For transmission.
 
 #include<stdio.h>
 int a[10][10],n;
