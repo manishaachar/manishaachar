@@ -1,3 +1,7 @@
+#Write a C Program implement STACK with the following operations
+#a. Push an Element on to Stack 
+#b. Pop an Element from Stack
+
 #include<stdio.h>
 #include<stdlib.h>
 #define maxsize 100
