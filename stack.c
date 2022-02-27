@@ -1,71 +1,65 @@
-#Write a C Program implement STACK with the following operations
-#a. Push an Element on to Stack 
-#b. Pop an Element from Stack
-
 #include<stdio.h>
 #include<stdlib.h>
-#define maxsize 100
-int stack[maxsize],top=-1;
-
-void push(int ele)
+#define maxsize  5
+int stack[maxsize],i,top=-1,num;
+void push() 
 {
-if( top==maxsize-1)
+	if(top==maxsize-1)
+	printf("\n Stack is Full");
+	else
+	{
+		printf("\n Enter the Elements to Push: \n");
+		scanf("%d",&num);
+		stack[++top]=num;
+	}
+}
+void pop()
 {
-	printf("Stack is full");
-	exit(0);
+	if(top==-1)
+	printf("\n Stack is Empty \n");
+	else
+	{
+		printf("\n %d is Poped",stack[top]);
+		top--;
+	}
 }
-	stack[++top]=ele;
-}
-
-int pop()
-{ 
-int ele;
-if(top==-1)
-{
-printf("Stack is emplty");
-exit(0);
-}
-ele=stack[top--];
-return ele;
-}
-
-
 void display()
 {
-int i;
-if( top==-1)
-exit(0);
-for(i=top;i<=top;i--)
-printf("%d",stack[i]);
+
+	if(top==-1)
+	{
+	printf("\n Stack is Empty \n");
 }
 
 
+	  else
+	{
+		printf("\n Stack Elements are:");
+		for(i=0;i<=top;i++)
+		printf(" %d ",stack[i]);
+	}
+}
 void main()
 {
-int ch,ele;
-printf("1.push\n 2.pop\n 3.display \n 4.exit\n");
-printf("Enter your choice:");
-scanf("%d",&ch);
-while(1)
-{
-switch(ch)
-{
-case 1: printf("Enter the elemt to be inserted:");
-scanf("%d",&ele);
-push(ele);
-break;
-
-case 2: pop();
-break;
-
-case 3: display();
-break;
- default : printf("invalid input");
- exit(0);
- }
- }
- 
+	int ch;
+	
+	while(1)
+	{
+		printf("Stack operation are:");
+		printf("\n 1.PUSH\n 2.POP\n 3.DISPLAY\n 4.EXIT \n Enter your choice:");
+		scanf("%d",&ch);
+		switch(ch)	
+		{
+			case 1:push();
+			break;
+			case 2:pop();
+			break;
+			case 3: display();
+			break;
+			case 4: exit(0);
+			default:
+			printf("\n Invalid choice");
+			break;
+		}
+	}
 }
-
-
-
