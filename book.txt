@@ -1,0 +1,7 @@
+Elec|34
+Mech|67
+Elec|80
+Computer Science|43
+CIVIL|98
+Mech|65
+Computer Science|64
