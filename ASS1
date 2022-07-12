@@ -1,0 +1,266 @@
+mysql -h 192.168.14.71 -u VP21MC021 -p
+
+
+
+
+USE VP21MC021_COLLEGE;
+Database changed
+ CREATE TABLE BRANCH(
+          BID VARCHAR(10) PRIMARY KEY,
+         BNAME CHAR(30) NOT NULL,
+        HOD VARCHAR(10) NOT NULL);
+
+CREATE TABLE STUDENT(
+  	USN VARCHAR(10) PRIMARY KEY,
+	SNAME CHAR(30) NOT NULL,
+    	ADDRESS VARCHAR(30) NOT NULL,
+     	BID VARCHAR(10) NOT NULL,
+     	FOREIGN KEY(BID)REFERENCES BRANCH(BID),
+   	SEM VARCHAR(5) NOT NULL);
+   	
+
+ CREATE TABLE AUTHOR(
+       AID VARCHAR(10) PRIMARY KEY,
+       ANAME CHAR(30),
+       COUNTRY CHAR(20),
+       AGE INT(10));
+       
+ CREATE TABLE BOOK(
+       BOOKID VARCHAR(10) PRIMARY KEY,
+       BOOKNAME CHAR(50),
+       AID VARCHAR(10),
+       FOREIGN KEY(AID)REFERENCES AUTHOR(AID),
+       PUBLISHER CHAR(20),
+       BID VARCHAR(10),
+       FOREIGN KEY(BID)REFERENCES BRANCH(BID));
+       
+ CREATE TABLE BORROW(
+       USN VARCHAR(10),
+       BOOKID VARCHAR(10),
+       BORROW_DATE DATE,
+       PRIMARY KEY(USN,BOOKID),
+       FOREIGN KEY(USN)REFERENCES STUDENT(USN),
+       FOREIGN KEY(BOOKID)REFERENCES BOOK(BOOKID));
+       
+       mysql> DESC BRANCH;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| BID   | varchar(10) | NO   | PRI | NULL    |       |
+| BNAME | char(30)    | NO   |     | NULL    |       |
+| HOD   | varchar(10) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> DESC STUDENT;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| USN     | varchar(10) | NO   | PRI | NULL    |       |
+| SNAME   | char(30)    | NO   |     | NULL    |       |
+| ADDRESS | varchar(30) | NO   |     | NULL    |       |
+| BID     | varchar(10) | NO   | MUL | NULL    |       |
+| SEM     | varchar(5)  | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DESC AUTHOR;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| AID     | varchar(10) | NO   | PRI | NULL    |       |
+| ANAME   | char(30)    | YES  |     | NULL    |       |
+| COUNTRY | char(20)    | YES  |     | NULL    |       |
+| AGE     | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> DESC BOOK;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| BOOKID    | varchar(10) | NO   | PRI | NULL    |       |
+| BOOKNAME  | char(50)    | YES  |     | NULL    |       |
+| AID       | varchar(10) | YES  | MUL | NULL    |       |
+| PUBLISHER | char(20)    | YES  |     | NULL    |       |
+| BID       | varchar(10) | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DESC BORROW;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| USN         | varchar(10) | NO   | PRI | NULL    |       |
+| BOOKID      | varchar(10) | NO   | PRI | NULL    |       |
+| BORROW_DATE | date        | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SHOW TABLES;
++-----------------------------+
+| Tables_in_VP21MC021_COLLEGE |
++-----------------------------+
+| AUTHOR                      |
+| BOOK                        |
+| BORROW                      |
+| BRANCH                      |
+| STUDENT                     |
++-----------------------------+
+5 rows in set (0.00 sec)
+
+INSERT INTO BRANCH
+    VALUES('101','MCA','M.K.RAO');
+    
+    INSERT INTO BRANCH
+    VALUES('201','MBA','KAVERI');
+    
+    INSERT INTO BRANCH
+    VALUES('301','CIVIL','TARUN');
+    
+    INSERT INTO BRANCH
+    VALUES('401','CS','ANU');
+    
+    INSERT INTO BRANCH
+    VALUES('501','ME','S.SHETTY');
+    
+mysql> SELECT * FROM BRANCH;
++-----+-------+----------+
+| BID | BNAME | HOD      |
++-----+-------+----------+
+| 101 | MCA   | M.K.RAO  |
+| 201 | MBA   | KAVERI   |
+| 301 | CIVIL | TARUN    |
+| 401 | CS    | ANU      |
+| 501 | ME    | S.SHETTY |
++-----+-------+----------+
+5 rows in set (0.00 sec)
+
+INSERT INTO STUDENT 
+    VALUES('4VP21MC001','KARTHIK','PUTTUR','101',2);
+    
+    INSERT INTO STUDENT 
+    VALUES('4VP21CS021','MANISHA','PUTTUR','401',2);
+    
+    INSERT INTO STUDENT 
+    VALUES('4VP21MB071','ARUN','PUTTUR','201',6);
+    
+    INSERT INTO STUDENT 
+    VALUES('4VP21ME011','KARAN','PUTTUR','101',8);
+    
+    INSERT INTO STUDENT 
+    VALUES('4VP21CC034','MANOJ','PUTTUR','101',3);
+    
+    INSERT INTO STUDENT 
+    VALUES('4VP21CC064','SACHIN','PUTTUR','301',5);
+    
+    INSERT INTO STUDENT 
+    VALUES('4VP21ME034','HARI','PUTTUR','501',4);
+
+mysql> SELECT *FROM STUDENT;
++------------+---------+---------+-----+-----+
+| USN        | SNAME   | ADDRESS | BID | SEM |
++------------+---------+---------+-----+-----+
+| 4VP21CC034 | MANOJ   | PUTTUR  | 101 | 3   |
+| 4VP21CC064 | SACHIN  | PUTTUR  | 301 | 5   |
+| 4VP21CS021 | MANISHA | PUTTUR  | 401 | 2   |
+| 4VP21MB071 | ARUN    | PUTTUR  | 201 | 6   |
+| 4VP21MC001 | KARTHIK | PUTTUR  | 101 | 2   |
+| 4VP21ME011 | KARAN   | PUTTUR  | 101 | 8   |
+| 4VP21ME034 | HARI    | PUTTUR  | 501 | 4   |
++------------+---------+---------+-----+-----+
+7 rows in set (0.21 sec)
+
+INSERT INTO AUTHOR
+    VALUES('A1','HARIPRASAD','SOUTH KOREA','58');
+    
+INSERT INTO AUTHOR
+    VALUES('A2','A.K.JOHN','CANADA','48');
+   
+INSERT INTO AUTHOR
+    VALUES('A3','M.K.SHETTY','INDIA','60');
+    
+   INSERT INTO AUTHOR
+    VALUES('A4','CATHRIN','USA','59');
+    
+    INSERT INTO AUTHOR
+    VALUES('A5','N.JANAKI','INDIA','70');
+
+mysql> SELECT * FROM AUTHOR;
++-----+------------+-------------+------+
+| AID | ANAME      | COUNTRY     | AGE  |
++-----+------------+-------------+------+
+| A1  | HARIPRASAD | SOUTH KOREA |   58 |
+| A2  | A.K.JOHN   | CANADA      |   48 |
+| A3  | M.K.SHETTY | INDIA       |   60 |
+| A4  | CATHRIN    | USA         |   59 |
+| A5  | N.JANAKI   | INDIA       |   70 |
++-----+------------+-------------+------+
+5 rows in set (0.00 sec)
+
+INSERT INTO BOOK
+    VALUES('BK1','SPEED','A2','M.K PUBLISHER', 101);
+
+
+INSERT INTO BOOK
+    VALUES('BK2','DATA STRUCTURE','A5','V.P PUBLISHER', 501);
+    
+    
+    INSERT INTO BOOK
+    VALUES('BK3','BUSINESS','A3','M.M PUBLISHER', 201);
+
+INSERT INTO BOOK
+    VALUES('BK4','COMPUTER NETWOEK','A1','ARUN PUBLISHER', 401);
+
+INSERT INTO BOOK
+    VALUES('BK5','SPEED','A4','SURI PUBLISHER', 301);
+
+mysql> SELECT * FROM BOOK;
++--------+------------------+------+----------------+------+
+| BOOKID | BOOKNAME         | AID  | PUBLISHER      | BID  |
++--------+------------------+------+----------------+------+
+| BK1    | SPEED            | A2   | M.K PUBLISHER  | 101  |
+| BK2    | DATA STRUCTURE   | A5   | V.P PUBLISHER  | 501  |
+| BK3    | BUSINESS         | A3   | M.M PUBLISHER  | 201  |
+| BK4    | COMPUTER NETWOEK | A1   | ARUN PUBLISHER | 401  |
+| BK5    | SPEED            | A4   | SURI PUBLISHER | 301  |
++--------+------------------+------+----------------+------+
+5 rows in set (0.00 sec)
+
+
+INSERT INTO BORROW
+    VALUES('4VP21CC034 ','BK2','2022-04-12');
+
+INSERT INTO BORROW
+    VALUES('4VP21CC064 ','BK1','2019-04-22'); 
+    
+    INSERT INTO BORROW
+    VALUES('4VP21CS021 ','BK3','2022-02-11'); 
+    
+    INSERT INTO BORROW
+    VALUES('4VP21MB071 ','BK4','2021-12-22'); 
+    
+    INSERT INTO BORROW
+    VALUES('4VP21ME011','BK5','2021-06-30'); 
+    
+mysql> SELECT * FROM BORROW;
++------------+--------+-------------+
+| USN        | BOOKID | BORROW_DATE |
++------------+--------+-------------+
+| 4VP21CC034 | BK2    | 2022-04-12  |
+| 4VP21CC064 | BK1    | 2019-04-22  |
+| 4VP21CS021 | BK3    | 2022-02-11  |
+| 4VP21MB071 | BK4    | 2021-12-22  |
+| 4VP21ME011 | BK5    | 2021-06-30  |
++------------+--------+-------------+
+5 rows in set (0.00 sec)
+
+
+
+SELECT SNAME,BID
+FROM STUDENT,BRANCH
+WHERE STUDENT.BID=(BRACH.BID
+WHERE BID=101);
+
+    
+       
