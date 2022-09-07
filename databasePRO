@@ -1,0 +1,31 @@
+order_details
+create table order_details
+(order_details_id int(11) primary key,
+order id int(11), foreign key(order_id) references order(orfder_id),
+prod_id int(11), foreign key(prod_id) references product(prod_id),
+qty int(11)
+mrp double
+total double)
+
+feedback
+create table feedback
+(feedback_id int(11) primary key,
+cust_id int(11), foreign key(cust_id) references customer(cust_id),
+message varchar(200),
+date date)
+
+cart
+create table cart
+(cart_id int(11) primary key,
+prod_id int(11), foreign key(prod_id) references product(prod_id)
+cust_id int(11),
+price double,
+total double,
+date date)
+
+tracking
+create table tracking
+(tracking_id int(11) primary key,
+order_id int(11), foreign key(order_id) references order(order_id),
+cust_id int(11), foreign key(cust_id) references cutomer(cust_id),
+date date)
