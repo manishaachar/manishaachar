@@ -1,3 +1,37 @@
+product 
+
+create table product(
+prod_id int(11) primary key,
+cid int(11),
+foregin key(cid) reference category(cid));
+
+
+insert into product values('
+
+
+order
+
+create table order(
+order_id int(11) primary ke,
+cust_id int(11),
+foregin key(cust_id) referneces customer(cust_id),
+gtotal double,
+order_date date
+status varchar(30));
+
+
+
+payment 
+
+create table payment(
+payment_id int(11) primary key,
+order_id int(11),
+foregin key(order_id)references order(order_id),
+amount double,
+payment_type varchar(50),
+address varchar(200));
+
+
 order_details
 create table order_details
 (order_details_id int(11) primary key,
